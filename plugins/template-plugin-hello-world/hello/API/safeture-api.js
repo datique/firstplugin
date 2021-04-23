@@ -28,7 +28,23 @@ http.createServer(function (req, res) {
 
         sendResponse(res, json);
 
-    } else if (req.url === "/regions") {
+    }
+    else if (req.url.indexOf("/regions/") > -1) {
+        //console.log(req.url.split('/')[2]);
+        var values = req.url.split('/');
+        var value = "";
+
+        if (values.length > 1)
+            value = decodeURI(values[2]);
+
+
+        //console.log(value);
+        json = GetDataByRegions(value);
+
+        sendResponse(res, json);
+
+    }
+    else if (req.url === "/allregions") {
         json = GetRegions();
 
         sendResponse(res, json);
@@ -234,7 +250,7 @@ function GetRegions() {
     let data = JSON.parse(rawdata);
 
 
-    var regions = data.data.map((data) => data.regionid);
+    var regions = data.data.map((data) => ({ 'regionid': data.iso3166_1, 'region': data.regionid }));
 
 
     var json = JSON.stringify(regions);
@@ -243,35 +259,49 @@ function GetRegions() {
 
 }
 
-function GetDataByRegion(regionId) {
+function GetDataByRegions(regionIds) {
+    console.log(regionIds);
+
     let rawdata = fs.readFileSync('covid19.json');
     let data = JSON.parse(rawdata);
 
-    //var json = JSON.stringify(data)
-    //console.log(json)
+    var values = regionIds.split(',');
+
+    var json = "";
+    var matches = [];
+
+    for (var i = 0; i < values.length; i++) {
+        var match = data.data.myFind({ iso3166_1: values[i] });
+
+        if (match.length > 0) {
+            matches.push(match[0]);
+        }
+    }
+
+
+    if (matches.length > 1) {
+        json = JSON.stringify(matches);
+    }
+    else
+        console.log("not found");
+
+    return json.toString('utf8');
+}
+
+function GetDataByRegion(regionId) {
+    console.log(regionId);
+
+    let rawdata = fs.readFileSync('covid19.json');
+    let data = JSON.parse(rawdata);
+
+
 
     var json = "";
 
 
-    var match = data.data.myFind({ regionid: regionId });
+    var match = data.data.myFind({ iso3166_1: regionId });
 
     if (match.length > 0) {
-
-        /*
-        var d = {
-            'data': []
-        }
-
-
-        //json = JSON.stringify(match[0]);
-
-        d.data.push(match[0]);
-
-        //console.log(d);
-        */
-
-        //match[0].trend.description = escape(match[0].trend.description);
-
         json = JSON.stringify(match[0]);
     }
     else

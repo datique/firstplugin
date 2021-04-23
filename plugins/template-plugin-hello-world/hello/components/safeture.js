@@ -9,8 +9,10 @@ class Covid extends React.Component {
             error: null,
             isLoaded: false,
             isLoadedDetails: false,
+            hasData: false,
             details: {},
             regions: [],
+            data: [],
             regionId: 'test'
 
         };
@@ -34,62 +36,18 @@ class Covid extends React.Component {
         console.debug("currentTerminalId:" + currentTerminalId)
     }
 
-    attach() {
-        this.storeHelper.handleAction(
-            '@orion/terminals-helper/SEND_TERMINAL_ENTRY',
-            ({ action, preventDefault }) => {
-                const { terminalId, entry } = action;
-                const state = storeHelper.getState();
-                const getDefaultHostConnectionId = selectorsHelper.make('getDefaultHostConnectionId');
-                const getTerminalHostConnectionId = selectorsHelper.make('getTerminalHostConnectionId');
-                const hostConnectionId =
-                    getTerminalHostConnectionId(state, {
-                        terminalId,
-                    }) || getDefaultHostConnectionId(state);
 
-                console.log("terminalId:" + terminalId);
-                console.log("hostConnectionId:" + hostConnectionId);
-
-
-                let cryptic = entry?.cryptic;
-
-                if (cryptic === 'ER' || cryptic === 'E') {
-                    const { activePNR } = state.plugins.pnrRetrieve || {};
-                    const currentPnr = activePNR[hostConnectionId];
-                    const dueOrPaidSegments = currentPnr.DueOrPaidSegment;
-
-                    if (Object.entries(dueOrPaidSegments).length === 0) {
-                        //preventDefault();
-
-                        //calculateAndApplyRetention(entry, currentPnr, terminalId, hostConnectionId);
-
-                        //sendCommand(entry, 'ER', terminalId, hostConnectionId);
-                    }
-                }
-            },
-        );
-
-    }
 
 
     async componentDidMount() {
-
-
-
-
-
         const requestOptions = {
             method: 'GET',
-            //mode: 'no-cors', // no-cors, *cors, same-origin
             headers: {
-
-            },
-            //body: '{"userid":"travelport.oufb.api","password":"hsTRvbIY63bGFDT63vb","authentication":"BASIC"}'
+            }
         }
 
 
-
-        fetch("http://localhost:8081/regions")
+        fetch("http://localhost:8081/allregions")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -99,9 +57,6 @@ class Covid extends React.Component {
                         regions: result
                     });
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
                 (error) => {
                     this.setState({
                         isLoaded: true,
@@ -109,39 +64,9 @@ class Covid extends React.Component {
                     });
                 }
             )
-
-        /*
-    const state = storeHelper.getState();
-    const getCurrentTerminalIdFactory = () => (state) => state.terminals.current.currentTerminalId;
-    
-    selectorsHelper.registerFactory('getCurrentTerminalId', getCurrentTerminalIdFactory);
-    
-    const getCurrentTerminalId = selectorsHelper.make('getCurrentTerminalId');
-    
-    const currentTerminalId = getCurrentTerminalId(state);
-    
-    
-    const hostConnection = { id: 'hostConnection-1', host: '1G' };
-    
-    console.log(this._dispatchersHelper);
-    
-    this._dispatchersHelper.dispatch('createHostConnection', { hostConnection });
-    
-    this._dispatchersHelper.dispatch('sendHostConnectionEntry', {
-        hostConnectionId: 'hostConnection-1',
-        entry: { cryptic: '' },
-    });
-    */
     }
 
-
-    onRegionChangeHandler = (event) => {
-        var regionId = event.target.value;
-        this.setState({ regionId: regionId, isLoadedDetails: false });
-
-        console.log(regionId);
-
-
+    getRegion(regionId) {
         fetch("http://localhost:8081/region/" + regionId)
             .then(res => res.json())
             .then(
@@ -153,16 +78,44 @@ class Covid extends React.Component {
                         details: result
                     });
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
                 (error) => {
-                    this.state({
+                    this.setState({
                         isLoadedDetails: true,
                         error
                     });
                 }
             )
+    }
+
+    getRegions(regionIds) {
+        fetch("http://localhost:8081/regions/" + regionIds)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+
+                    this.setState({
+                        hasData: true,
+                        data: result
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        hasData: false,
+                        error
+                    });
+                }
+            )
+    }
+
+    onRegionChangeHandler = (event) => {
+        var regionId = event.target.value;
+        this.setState({ regionId: regionId, isLoadedDetails: false });
+
+        console.log(regionId);
+
+        this.getRegion(regionId);
+
 
     }
 
@@ -196,40 +149,46 @@ class Covid extends React.Component {
 
         if (currentPnr) {
             const airSegments = currentPnr.airSegments;
-            console.log("Click!!");
+
+
+            this.getSegmentData(airSegments);
+
+        }
+    }
+
+    getSegmentData(airSegments) {
+        var countryCodes = [];
+
+        for (var key in airSegments) {
+            if (airSegments.hasOwnProperty(key)) {
+                var segment = airSegments[key];
+                var code = segment.originZone.countryCode;
+
+                if (!countryCodes.includes(code))
+                    countryCodes.push(code);
+
+                code = segment.destinationZone.countryCode;
+
+                if (!countryCodes.includes(code))
+                    countryCodes.push(code);
+
+                console.log(key + " -> " + segment);
+            }
+        }
+
+        console.log(countryCodes.join());
+
+        if (countryCodes && countryCodes.length > 0) {
+            this.getRegions(countryCodes.join());
         }
     }
 
 
-    /*
-    fetchData = () => {
-        alert(this.state.regionId);
-     
-        fetch("http://localhost:8081/region/andorra")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        details: result.data
-                    });
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    this.state({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
-    }
-    */
+
 
 
     render() {
-        const { error, isLoaded, isLoadedDetails, details, regions, regionId } = this.state;
+        const { error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -247,8 +206,8 @@ class Covid extends React.Component {
                         <select onChange={this.onRegionChangeHandler}>
                             <option key='a-0' selected='selected' value={''}>Select a Region</option>
                             {regions.map(item => (
-                                <option key={item} value={item}>
-                                    {item}
+                                <option key={item.regionid} value={item.regionid}>
+                                    {item.region}
                                 </option>
                             ))}
                         </select>
@@ -285,6 +244,21 @@ class Covid extends React.Component {
                             </div>
 
                         </div>
+                    }
+
+                    {hasData &&
+                        <div style={{ display: !hasData ? "none" : "block" }}>
+                            {data.map(region => (
+                                <div>
+                                    <h1>{region.regionid}</h1>
+
+                                    <div dangerouslySetInnerHTML={{ __html: region.trend.description }} />
+                                    <br />
+
+                                </div>
+                            ))}
+                        </div>
+
                     }
                 </div >
             );
