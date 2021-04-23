@@ -1,11 +1,15 @@
 
 
+import Tabs from "./Tabs"
+//require('../main.css')
+
 class Covid extends React.Component {
 
 
     constructor({ props, storeHelper, selectorsHelper }) {
         super(props);
         this.state = {
+            showLoading: false,
             error: null,
             isLoaded: false,
             isLoadedDetails: false,
@@ -46,6 +50,7 @@ class Covid extends React.Component {
             }
         }
 
+        this.setState({ showLoading: true });
 
         fetch("http://localhost:8081/allregions")
             .then(res => res.json())
@@ -54,19 +59,24 @@ class Covid extends React.Component {
                     //console.log(result)
                     this.setState({
                         isLoaded: true,
-                        regions: result
+                        regions: result,
+                        showLoading: false
                     });
                 },
                 (error) => {
                     this.setState({
                         isLoaded: true,
+                        showLoading: false,
                         error
+
                     });
                 }
             )
     }
 
     getRegion(regionId) {
+        this.setState({ showLoading: true });
+
         fetch("http://localhost:8081/region/" + regionId)
             .then(res => res.json())
             .then(
@@ -75,19 +85,23 @@ class Covid extends React.Component {
 
                     this.setState({
                         isLoadedDetails: true,
-                        details: result
+                        details: result,
+                        showLoading: false
                     });
                 },
                 (error) => {
                     this.setState({
                         isLoadedDetails: true,
-                        error
+                        error,
+                        showLoading: false
                     });
                 }
             )
     }
 
     getRegions(regionIds) {
+        this.setState({ showLoading: true });
+
         fetch("http://localhost:8081/regions/" + regionIds)
             .then(res => res.json())
             .then(
@@ -96,13 +110,15 @@ class Covid extends React.Component {
 
                     this.setState({
                         hasData: true,
-                        data: result
+                        data: result,
+                        showLoading: false
                     });
                 },
                 (error) => {
                     this.setState({
                         hasData: false,
-                        error
+                        error,
+                        showLoading: false
                     });
                 }
             )
@@ -188,15 +204,21 @@ class Covid extends React.Component {
 
 
     render() {
-        const { error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
+        const { showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
         if (error) {
             return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
+        } else if (showLoading) {
             return <div>Loading...</div>;
         } else {
             return (
+
+
+
+
                 <div>
+
+
                     <div>
                         <input type='button' value='Send' onClick={this.onClickHandler} />
                     </div>
@@ -215,14 +237,16 @@ class Covid extends React.Component {
 
 
 
-                    {(isLoaded && !isLoadedDetails) &&
+                    {
+                        (isLoaded && !isLoadedDetails) &&
 
                         <div style={{ display: isLoadedDetails ? "none" : "block" }}>
                             <h3>Loading details..</h3>
                         </div>
                     }
 
-                    {isLoadedDetails &&
+                    {
+                        isLoadedDetails &&
                         <div style={{ display: !isLoadedDetails ? "none" : "block" }}>
                             <div style={{ width: '965px' }} >
                                 <h1>{details.regionid} ({details.trend.value}%)</h1>
@@ -246,18 +270,41 @@ class Covid extends React.Component {
                         </div>
                     }
 
-                    {hasData &&
+                    {
+                        hasData &&
+
                         <div style={{ display: !hasData ? "none" : "block" }}>
-                            {data.map(region => (
-                                <div>
-                                    <h1>{region.regionid}</h1>
+                            {/*
+                            <Tabs>
+                                {data.map(region => (
 
-                                    <div dangerouslySetInnerHTML={{ __html: region.trend.description }} />
-                                    <br />
+                                    <Tabs.Tab id={region.regionid} label={region.regionid}>
+                                        <Tabs.TabPanel>
+                                            <div dangerouslySetInnerHTML={{ __html: region.trend.description }} />
+                                        </Tabs.TabPanel>
+                                    </Tabs.Tab>
+                                ))}
+                            </Tabs>
+                            */}
 
-                                </div>
-                            ))}
+                            <div>
+
+                                <Tabs>
+                                    {data.map(region => (
+                                        <div label={region.regionid}>
+                                            <div dangerouslySetInnerHTML={{ __html: region.trend.description }} />
+                                        </div>
+                                    ))}
+
+                                </Tabs>
+                            </div>
+
+
                         </div>
+
+
+
+
 
                     }
                 </div >
