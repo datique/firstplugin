@@ -1,0 +1,54 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist/*
+dist/
+!/dist/index.html
+/tmp
+/out-tsc
+/docs
+/cdn
+/packages/*/types/
+/plugins/*/types/
+/packages/*/lib/
+/plugins/*/lib/
+/packages/*/es/
+/plugins/*/es/
+
+# dependencies
+node_modules/
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/flow-typed
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log*
+debug.log*
+lerna-debug.log*
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# TODO: remove this ignore when `cypress` install issue gets solved.
+/cypress

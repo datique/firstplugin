@@ -1,0 +1,55 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "azureAutoComplete": true,
+  "separateMajorMinor": true,
+  "ignoreUnstable": true,
+  "packageRules": [
+    {
+      "groupName": "ESLint",
+      "packageNames": ["babel-eslint", "@pos-web/eslint-config"],
+      "packagePatterns": ["^@typescript-eslint/", "^eslint"]
+    },
+
+    {
+      "groupName": "Testing Library",
+      "packagePatterns": ["^@testing-library/"]
+    },
+
+    {
+      "groupName": "Devkit",
+      "packagePatterns": ["^@pos-web/devkit"]
+    },
+
+    {
+      "groupName": "Orion Framework",
+      "packagePatterns": ["^@orion"]
+    },
+
+    {
+      "groupName": "POS Web Plugins",
+      "packagePatterns": ["^@pos-web/plugin", "^pos-web-plugin-"]
+    },
+
+    {
+      "packagePatterns": ["*"],
+      "minor": {
+        "groupName": "all non-major dependencies",
+        "groupSlug": "all-minor-patch"
+      },
+      "excludePackageNames": ["babel-eslint", "@pos-web/eslint-config"],
+      "excludePackagePatterns": [
+        "^@typescript-eslint/",
+        "^eslint",
+
+        "^@testing-library/",
+
+        "^@pos-web/devkit",
+
+        "^@pos-web/plugin",
+        "^pos-web-plugin-",
+
+        "^@orion"
+      ]
+    }
+  ]
+}

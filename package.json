@@ -1,0 +1,54 @@
+{
+  "name": "@pos-web/plugins-firstplugin",
+  "version": "0.0.0",
+  "description": "firstplugin project",
+  "private": true,
+  "workspaces": [
+    "plugins/*"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": "Travelport",
+  "scripts": {
+    "start": "concurrently \"yarn build:watch\" \"devkit-scripts serve\"",
+    "tunnel": "devkit-scripts tunnel --port 5000",
+    "build": "lerna run build",
+    "build:prod": "lerna run build:prod",
+    "build:dev": "lerna run build:dev",
+    "build:watch": "lerna run --parallel build:dev -- --watch",
+    "pack-plugins": "devkit-scripts pack",
+    "format": "devkit-scripts format --write",
+    "format:check": "devkit-scripts format --check",
+    "test": "devkit-scripts test",
+    "test:watch": "devkit-scripts test --watchAll",
+    "lint": "devkit-scripts lint",
+    "check-size": "devkit-scripts check-size",
+    "preinstall": "npx --userconfig ./.npmrc @pos-web/devkit-scripts force-use-yarn",
+    "preuninstall": "devkit-scripts force-use-yarn",
+    "preupdate": "devkit-scripts force-use-yarn"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "11.0.0",
+    "@pos-web/devkit-scripts": "3.1.6",
+    "@pos-web/eslint-config": "3.0.2",
+    "@typescript-eslint/eslint-plugin": "4.14.1",
+    "@typescript-eslint/parser": "4.14.1",
+    "babel-eslint": "10.1.0",
+    "concurrently": "5.3.0",
+    "eslint": "7.18.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jest": "24.1.3",
+    "eslint-plugin-jest-dom": "3.6.5",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-react": "7.22.0",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-plugin-testing-library": "3.10.1",
+    "husky": "4.3.8",
+    "lerna": "3.22.1"
+  },
+  "dependencies": {
+    "axios": "0.21.1"
+  }
+}

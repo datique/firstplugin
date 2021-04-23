@@ -1,0 +1,13 @@
+{
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "exact": true,
+      "message": "build(release): publish",
+      "conventionalCommits": true,
+      "verifyAccess": false
+    }
+  },
+  "version": "independent"
+}

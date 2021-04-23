@@ -1,0 +1,68 @@
+{
+    "data": [
+        {
+            "regionid": "Andorra",
+            "longitude": "1.576",
+            "latitude": "42.546",
+            "trend": {
+                "description": "",
+                "value": 55.6
+            },
+            "travelrestrictions": {
+                "international": 2,
+                "domestic": 0
+            },
+            "iso3166_1": "AD",
+            "iso3166_2": "",
+            "data": [
+                {
+                    "title": "quarantine",
+                    "description": [
+                        "1",
+                        "2",
+                        "2",
+                        "5"
+                    ]
+                },
+                {
+                    "title": "airline",
+                    "description": [
+                        "abc."
+                    ]
+                }
+            ]
+        },
+        {
+            "regionid": "United Arab Emirates",
+            "longitude": "54.098",
+            "latitude": "24.183",
+            "trend": {
+                "description": "aa",
+                "value": 55.6
+            },
+            "travelrestrictions": {
+                "international": 2,
+                "domestic": 2
+            },
+            "iso3166_1": "AE",
+            "iso3166_2": "",
+            "data": [
+                {
+                    "title": "quarantine",
+                    "description": [
+                        "",
+                        ""                       
+                        
+                    ]
+                },
+                {
+                    "title": "airline",
+                    "description": [
+                        "",
+                        ""
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+  "name": "@pos-web/template-plugin-hello-world",
+  "version": "0.0.0",
+  "description": "This plugin is a template.",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "./dist/@pos-web/template-plugin-hello-world.umd.js",
+  "browser": "./dist/@pos-web/template-plugin-hello-world.umd.min.js",
+  "private": true,
+  "files": [
+    "dist",
+    "translations"
+  ],
+  "scripts": {
+    "build": "devkit-scripts build",
+    "build:dev": "devkit-scripts build --formats umd",
+    "build:prod": "devkit-scripts build --formats umd.min"
+  },
+  "dependencies": {
+    "prop-types": "15.7.2"
+  },
+  "devDependencies": {
+    "@orion/core": "0.1.0",
+    "@orion/i18n": "0.1.0",
+    "@orion/ui": "0.1.0",
+    "@pos-web/devkit-scripts": "3.1.6",
+    "@testing-library/dom": "7.29.4",
+    "@testing-library/react": "11.2.3",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-is": "17.0.1",
+    "react-redux": "7.2.2",
+    "redux": "4.0.5",
+    "reselect": "4.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0",
+    "react-is": "^16.8.0 || ^17.0.0"
+  },
+  "externalDependencies": {
+    "react": {
+      "global": "React"
+    },
+    "react-dom": {
+      "global": "ReactDOM"
+    },
+    "react-is": {
+      "global": "ReactIs"
+    }
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  }
+}
