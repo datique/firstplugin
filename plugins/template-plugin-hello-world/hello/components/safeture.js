@@ -1,6 +1,8 @@
+import React from 'react';
+import Tabs from "./Tabs";
+//import icon from '/plugins/template-plugin-hello-world/hello/images/icon.jpg'
 
 
-import Tabs from "./Tabs"
 //require('../main.css')
 
 class Covid extends React.Component {
@@ -20,6 +22,7 @@ class Covid extends React.Component {
             regionId: 'test'
 
         };
+
 
 
 
@@ -206,6 +209,8 @@ class Covid extends React.Component {
     render() {
         const { showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
+
+
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (showLoading) {
@@ -216,11 +221,12 @@ class Covid extends React.Component {
 
 
 
-                <div>
+                < div >
 
 
                     <div>
-                        <input type='button' value='Send' onClick={this.onClickHandler} />
+                        <input type='image' height='35px' onClick onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
+                        {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
                     </div>
 
                     <div>
