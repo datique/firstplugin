@@ -32,15 +32,22 @@ export const handleRetrieveBookingFile = ({ storeHelper, selectorsHelper }) => {
       const currentPnr = activePNR[hostConnectionId];
       const airSegments = currentPnr.airSegments;
       const hotelSegments = currentPnr.hotelSegments;
-      if (Object.entries(airSegments).length > 0) {
-        console.log('air segments found');
-        // this.setState({
-        //  hasPnr: true
-        //});
-      }
 
-      if (Object.entries(hotelSegments).length > 0) {
-        console.log('hotel segments found');
+      if (currentPnr) {
+        if (airSegments) {
+          if (Object.entries(airSegments).length > 0) {
+            console.log('air segments found');
+            // this.setState({
+            //  hasPnr: true
+            //});
+          }
+        }
+
+        if (hotelSegments) {
+          if (Object.entries(hotelSegments).length > 0) {
+            console.log('hotel segments found');
+          }
+        }
       }
     }
   });
