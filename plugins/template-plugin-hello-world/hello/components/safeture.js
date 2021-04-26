@@ -19,7 +19,8 @@ class Covid extends React.Component {
             details: {},
             regions: [],
             data: [],
-            regionId: 'test'
+            regionId: 'test',
+            firstLoad: true,
 
         };
 
@@ -63,14 +64,16 @@ class Covid extends React.Component {
                     this.setState({
                         isLoaded: true,
                         regions: result,
-                        showLoading: false
+                        showLoading: false,
+
                     });
                 },
                 (error) => {
                     this.setState({
                         isLoaded: true,
                         showLoading: false,
-                        error
+                        error,
+
 
                     });
                 }
@@ -78,7 +81,7 @@ class Covid extends React.Component {
     }
 
     getRegion(regionId) {
-        this.setState({ showLoading: true });
+        this.setState({ isLoadedDetails: false, firstLoad: false });
 
         fetch("http://localhost:8081/region/" + regionId)
             .then(res => res.json())
@@ -207,7 +210,7 @@ class Covid extends React.Component {
 
 
     render() {
-        const { showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
+        const { firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
 
 
@@ -218,19 +221,13 @@ class Covid extends React.Component {
         } else {
             return (
 
-
-
-
-                < div >
-
-
+                <div>
                     <div>
                         <input type='image' height='35px' onClick onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
                         {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
                     </div>
 
                     <div>
-
                         <select onChange={this.onRegionChangeHandler}>
                             <option key='a-0' selected='selected' value={''}>Select a Region</option>
                             {regions.map(item => (
@@ -244,7 +241,7 @@ class Covid extends React.Component {
 
 
                     {
-                        (isLoaded && !isLoadedDetails) &&
+                        (!firstLoad && !isLoadedDetails) &&
 
                         <div style={{ display: isLoadedDetails ? "none" : "block" }}>
                             <h3>Loading details..</h3>
