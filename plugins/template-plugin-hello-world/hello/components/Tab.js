@@ -24,12 +24,31 @@ class Tab extends Component {
 
         let className = 'tab-list-item';
 
+        const tabListItem = {
+            display: 'inline-block',
+            listStyle: 'none',
+            marginBottom: '-1px',
+            padding: '0.5rem 0.75rem'
+        }
+
+        const tabListActive = {
+            display: 'inline-block',
+            listStyle: 'none',
+            backgroundColor: 'white',
+            border: 'solid #ccc',
+            borderWidth: '1px 1px 0 1px'
+
+        }
+
+        let style = tabListItem;
+
         if (activeTab === label) {
             className += ' tab-list-active';
+            style = tabListActive;
         }
 
         return (
-            <li
+            <li style={style}
                 className={className}
                 onClick={onClick}
             >

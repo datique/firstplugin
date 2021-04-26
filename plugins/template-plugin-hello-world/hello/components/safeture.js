@@ -1,5 +1,6 @@
 import React from 'react';
 import Tabs from "./Tabs";
+//import './Tabs.css'
 //import icon from '/plugins/template-plugin-hello-world/hello/images/icon.jpg'
 
 
@@ -21,6 +22,7 @@ class Covid extends React.Component {
             data: [],
             regionId: 'test',
             firstLoad: true,
+            hasPnr: false,
 
         };
 
@@ -106,7 +108,7 @@ class Covid extends React.Component {
     }
 
     getRegions(regionIds) {
-        this.setState({ showLoading: true });
+        this.setState({ isLoadedDetails: false });
 
         fetch("http://localhost:8081/regions/" + regionIds)
             .then(res => res.json())
@@ -117,14 +119,14 @@ class Covid extends React.Component {
                     this.setState({
                         hasData: true,
                         data: result,
-                        showLoading: false
+                        isLoadedDetails: true
                     });
                 },
                 (error) => {
                     this.setState({
                         hasData: false,
                         error,
-                        showLoading: false
+                        isLoadedDetails: true
                     });
                 }
             )
@@ -202,6 +204,7 @@ class Covid extends React.Component {
 
         if (countryCodes && countryCodes.length > 0) {
             this.getRegions(countryCodes.join());
+            this.setState({ hasPnr: true });
         }
     }
 
@@ -210,7 +213,7 @@ class Covid extends React.Component {
 
 
     render() {
-        const { firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
+        const { hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
 
 
@@ -227,17 +230,18 @@ class Covid extends React.Component {
                         {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
                     </div>
 
-                    <div>
-                        <select onChange={this.onRegionChangeHandler}>
-                            <option key='a-0' selected='selected' value={''}>Select a Region</option>
-                            {regions.map(item => (
-                                <option key={item.regionid} value={item.regionid}>
-                                    {item.region}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
+                    { !hasPnr &&
+                        <div>
+                            <select onChange={this.onRegionChangeHandler}>
+                                <option key='a-0' selected='selected' value={''}>Select a Region</option>
+                                {regions.map(item => (
+                                    <option key={item.regionid} value={item.regionid}>
+                                        {item.region}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    }
 
 
                     {
@@ -249,7 +253,7 @@ class Covid extends React.Component {
                     }
 
                     {
-                        isLoadedDetails &&
+                        !hasPnr && isLoadedDetails &&
                         <div style={{ display: !isLoadedDetails ? "none" : "block" }}>
                             <div style={{ width: '965px' }} >
                                 <h1>{details.regionid} ({details.trend.value}%)</h1>
