@@ -1,7 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-export const handleRetrieveBookingFile = ({ storeHelper, selectorsHelper }) => {
-  //const [hasPnr] = useState(false);
+
+
+export const handleRetrieveBookingFile = ({ storeHelper, selectorsHelper, diHelper }) => {
+  //const [pnrLoaded, setPnrLoaded] = useState(false);
+
+
+
+  const pnrOpened = () => {
+    return {
+      type: 'OPENED'
+    };
+  };
+
+  const pnrStateReducer = (state = 'NONE', action) => {
+    switch (action.type) {
+      case 'OPENED':
+        return "OPENED";
+
+      case "CLOSED":
+        return "CLOSED";
+
+      default:
+        return "DONE";
+    }
+  };
+
+
+
+  storeHelper.registerReducer('pnrState', pnrStateReducer);
+
 
   const state = storeHelper.getState();
   const getCurrentTerminalIdFactory = () => (state) => state.terminals.current.currentTerminalId;
@@ -13,6 +41,7 @@ export const handleRetrieveBookingFile = ({ storeHelper, selectorsHelper }) => {
   const currentTerminalId = getCurrentTerminalId(state);
 
   console.debug("currentTerminalId:" + currentTerminalId)
+
 
 
 
@@ -36,10 +65,14 @@ export const handleRetrieveBookingFile = ({ storeHelper, selectorsHelper }) => {
       if (currentPnr) {
         if (airSegments) {
           if (Object.entries(airSegments).length > 0) {
+
             console.log('air segments found');
-            // this.setState({
-            //  hasPnr: true
-            //});
+            selectorsHelper.registerFactory('pnrOpened', ({ PNR }) => () => PNR);
+
+            diHelper.useValue('PNR', true);
+
+            storeHelper.dispatch(pnrOpened());
+
           }
         }
 

@@ -9,7 +9,7 @@ import Tabs from "./Tabs";
 class Covid extends React.Component {
 
 
-    constructor({ props, storeHelper, selectorsHelper }) {
+    constructor({ props, storeHelper, selectorsHelper, diHelper }) {
         super(props);
         this.state = {
             showLoading: false,
@@ -23,16 +23,22 @@ class Covid extends React.Component {
             regionId: 'test',
             firstLoad: true,
             hasPnr: false,
-
+            pnrOpened: false,
         };
 
 
+        var pnr = diHelper.get('PNR');
+        console.log("PNR:" + pnr)
 
 
-        this.storeHelper = storeHelper;
-        this.selectorsHelper = selectorsHelper;
+        this._storeHelper = storeHelper;
+        this._selectorsHelper = selectorsHelper;
+        this._diHelper = diHelper;
 
         console.log("storeHelper:" + storeHelper);
+
+        const hasPnrOpened = selectorsHelper.make('pnrOpened');
+        console.log("PNR Opened:" + hasPnrOpened()); // 5
 
         const state = storeHelper.getState();
         const getCurrentTerminalIdFactory = () => (state) => state.terminals.current.currentTerminalId;
@@ -148,6 +154,8 @@ class Covid extends React.Component {
 
         const { storeHelper, selectorsHelper } = this.props;
 
+
+
         const state = storeHelper.getState();
         const getCurrentTerminalIdFactory = () => (state) => state.terminals.current.currentTerminalId;
 
@@ -213,9 +221,15 @@ class Covid extends React.Component {
 
 
     render() {
-        const { hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
+        const { pnrLoaded, hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
+        const test = this._diHelper.get('PNR');
 
+        console.log("tst:" + test);
+
+        const s = this._storeHelper.getState();
+
+        const pnrState = s.plugins.pnrState || {};
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -225,6 +239,8 @@ class Covid extends React.Component {
             return (
 
                 <div>
+                    <span>?:{test}</span>
+                    <span>State:{pnrState}</span>
                     <div>
                         <input type='image' height='35px' onClick onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
                         {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
