@@ -248,6 +248,9 @@ class Covid extends React.Component {
 
         const pnrState = s.plugins.pnrState || {};
 
+
+
+
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (showLoading) {
@@ -257,6 +260,7 @@ class Covid extends React.Component {
 
 
                 <div>
+
 
                     <div>
                         <input type='image' height='35px' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
@@ -328,25 +332,33 @@ class Covid extends React.Component {
 
                             <div>
 
-                                {
-                                    /*
-                                    <POSComponent componentName="Tabs">
-                                        {
-                                            data.map(region => (
-                                                <POSComponent componentName="Tabs.Tab" id="tab1" label={region.regionid} >
+                                <div style={{ height: '300px', overflow: 'scroll' }}>
+                                    {
+                                        <POSComponent componentName="Tabs">
+                                            {data.map((region) => (
+                                                <POSComponent componentName="Tabs.Tab" id={region.regionid} label={region.regionid} >
                                                     <POSComponent componentName="Tabs.TabPanel">
+                                                        <h1>{region.regionid} ({region.trend.value}%)</h1>
+                                                        <div dangerouslySetInnerHTML={{ __html: region.trend.description }} />
+
+                                                        {region.data.map(d => (
+                                                            <div>
+                                                                <h2>{d.title}</h2>
+                                                                <div dangerouslySetInnerHTML={{ __html: d.description }} />
+                                                            </div>
+
+                                                        ))}
                                                     </POSComponent>
                                                 </POSComponent>
+                                            ))}
+                                        </POSComponent>
 
-                                            ));
+
 
                                     }
-                                    </POSComponent>
-                                    */
-                                }
+                                </div>
 
-
-
+                                {/*        
                                 <Tabs>
                                     {data.map(region => (
                                         <div label={region.regionid}>
@@ -364,6 +376,8 @@ class Covid extends React.Component {
                                     ))}
 
                                 </Tabs>
+                                */
+                                }
 
                             </div>
 
