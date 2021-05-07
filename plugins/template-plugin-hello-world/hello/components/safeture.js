@@ -24,6 +24,7 @@ class Covid extends React.Component {
             firstLoad: true,
             hasPnr: false,
             pnrOpened: false,
+            windowOpened: false
         };
 
 
@@ -149,6 +150,11 @@ class Covid extends React.Component {
 
     }
 
+    onCloseWindowHandler = (event) => {
+        this.setState({ windowOpened: false });
+
+    }
+
     onClickHandler = (event) => {
         //alert('onClickHandler');
 
@@ -184,7 +190,10 @@ class Covid extends React.Component {
 
 
             this.getSegmentData(airSegments);
-
+            this.setState({ hasPnr: true, windowOpened: true });
+        }
+        else {
+            this.setState({ hasPnr: false, windowOpened: true });
         }
     }
 
@@ -221,11 +230,12 @@ class Covid extends React.Component {
 
 
     render() {
-        const { pnrLoaded, hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
+        const { windowOpened, pnrLoaded, hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
         const test = this._diHelper.get('PNR');
 
         console.log("tst:" + test);
+        console.log('windowOpened:' + windowOpened)
 
         const s = this._storeHelper.getState();
 
@@ -240,12 +250,20 @@ class Covid extends React.Component {
 
                 <div>
                     <div>
-                        <input type='image' height='35px' onClick onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
+                        <input type='image' height='35px' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
                         {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
                     </div>
 
-                    { !hasPnr &&
+                    { windowOpened &&
                         <div>
+                            <input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} />
+                        </div>
+                    }
+                    {
+                        windowOpened && !hasPnr &&
+                        <div>
+
+
                             <select onChange={this.onRegionChangeHandler}>
                                 <option key='a-0' selected='selected' value={''}>Select a Region</option>
                                 {regions.map(item => (
@@ -292,9 +310,10 @@ class Covid extends React.Component {
                     }
 
                     {
-                        hasData &&
+                        hasData && windowOpened &&
 
                         <div style={{ display: !hasData ? "none" : "block" }}>
+
                             {/*
                             <Tabs>
                                 {data.map(region => (
