@@ -36,7 +36,9 @@ class Tab extends Component {
             listStyle: 'none',
             backgroundColor: 'white',
             border: 'solid #ccc',
-            borderWidth: '1px 1px 0 1px'
+            borderWidth: '1px 1px 0 1px',
+            paddingLeft: '25px',
+            paddingRight: '25px'
 
         }
 

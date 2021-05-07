@@ -36,28 +36,30 @@ class Tabs extends Component {
         } = this;
 
         return (
-            <div className="tabs">
-                <ol style={{ borderBottom: '1px solid #ccc', paddingLeft: '0', listStyle: 'none' }}>
-                    {children.map((child) => {
-                        const { label } = child.props;
+            <div style={{ padding: '16px', border: '1px #e8e8e8 solid', borderRadius: '3px' }}>
+                <div className="tabs" style={{ height: '300px', overflow: 'scroll' }}>
+                    <ol style={{ borderBottom: '1px solid #ccc', paddingLeft: '0', listStyle: 'none' }}>
+                        {children.map((child) => {
+                            const { label } = child.props;
 
-                        return (
-                            <Tab
-                                activeTab={activeTab}
-                                key={label}
-                                label={label}
-                                onClick={onClickTabItem}
-                            />
-                        );
-                    })}
-                </ol>
-                <div className="tab-content">
-                    {children.map((child) => {
-                        if (child.props.label !== activeTab) return undefined;
-                        return child.props.children;
-                    })}
-                </div>
-            </div >
+                            return (
+                                <Tab
+                                    activeTab={activeTab}
+                                    key={label}
+                                    label={label}
+                                    onClick={onClickTabItem}
+                                />
+                            );
+                        })}
+                    </ol>
+                    <div className="tab-content">
+                        {children.map((child) => {
+                            if (child.props.label !== activeTab) return undefined;
+                            return child.props.children;
+                        })}
+                    </div>
+                </div >
+            </div>
         );
     }
 }

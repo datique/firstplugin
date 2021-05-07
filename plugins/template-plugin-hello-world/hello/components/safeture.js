@@ -239,8 +239,6 @@ class Covid extends React.Component {
             return (
 
                 <div>
-                    <span>?:{test}</span>
-                    <span>State:{pnrState}</span>
                     <div>
                         <input type='image' height='35px' onClick onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
                         {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
@@ -315,7 +313,16 @@ class Covid extends React.Component {
                                 <Tabs>
                                     {data.map(region => (
                                         <div label={region.regionid}>
+                                            <h1>{region.regionid} ({region.trend.value}%)</h1>
                                             <div dangerouslySetInnerHTML={{ __html: region.trend.description }} />
+
+                                            {region.data.map(d => (
+                                                <div>
+                                                    <h2>{d.title}</h2>
+                                                    <div dangerouslySetInnerHTML={{ __html: d.description }} />
+                                                </div>
+
+                                            ))}
                                         </div>
                                     ))}
 
