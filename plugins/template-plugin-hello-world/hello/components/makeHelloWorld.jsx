@@ -6,13 +6,13 @@ import Covid from './safeture.js'
 //import Covid from './covid19.js'
 
 
-export function makeHelloWorld({ i18nHelper, dispatchersHelper, storeHelper, selectorsHelper, diHelper }) {
+export function makeHelloWorld({ i18nHelper, dispatchersHelper, storeHelper, selectorsHelper, diHelper, uiHelper }) {
   function HelloWorld({ t }) {
 
     return (
       <div>
 
-        <Covid storeHelper={storeHelper} selectorsHelper={selectorsHelper} diHelper={diHelper} />
+        <Covid storeHelper={storeHelper} selectorsHelper={selectorsHelper} diHelper={diHelper} uiHelper={uiHelper} />
       </div>
 
     );

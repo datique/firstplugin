@@ -1,5 +1,6 @@
 import React from 'react';
 import Tabs from "./Tabs";
+
 //import './Tabs.css'
 //import icon from '/plugins/template-plugin-hello-world/hello/images/icon.jpg'
 
@@ -9,7 +10,7 @@ import Tabs from "./Tabs";
 class Covid extends React.Component {
 
 
-    constructor({ props, storeHelper, selectorsHelper, diHelper }) {
+    constructor({ props, storeHelper, selectorsHelper, diHelper, uiHelper }) {
         super(props);
         this.state = {
             showLoading: false,
@@ -31,6 +32,10 @@ class Covid extends React.Component {
         var pnr = diHelper.get('PNR');
         console.log("PNR:" + pnr)
 
+
+        const { POSComponent } = uiHelper;
+
+        this._uiHelper = uiHelper;
 
         this._storeHelper = storeHelper;
         this._selectorsHelper = selectorsHelper;
@@ -230,6 +235,8 @@ class Covid extends React.Component {
 
 
     render() {
+
+        const { POSComponent } = this._uiHelper;
         const { windowOpened, pnrLoaded, hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
 
         const test = this._diHelper.get('PNR');
@@ -248,13 +255,16 @@ class Covid extends React.Component {
         } else {
             return (
 
+
                 <div>
+
                     <div>
                         <input type='image' height='35px' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
                         {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
                     </div>
 
-                    { windowOpened &&
+                    {
+                        windowOpened &&
                         <div>
                             <input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} />
                         </div>
@@ -285,7 +295,7 @@ class Covid extends React.Component {
                     }
 
                     {
-                        !hasPnr && isLoadedDetails &&
+                        windowOpened && !hasPnr && isLoadedDetails &&
                         <div style={{ display: !isLoadedDetails ? "none" : "block" }}>
                             <div style={{ width: '965px' }} >
                                 <h1>{details.regionid} ({details.trend.value}%)</h1>
@@ -314,20 +324,28 @@ class Covid extends React.Component {
 
                         <div style={{ display: !hasData ? "none" : "block" }}>
 
-                            {/*
-                            <Tabs>
-                                {data.map(region => (
 
-                                    <Tabs.Tab id={region.regionid} label={region.regionid}>
-                                        <Tabs.TabPanel>
-                                            <div dangerouslySetInnerHTML={{ __html: region.trend.description }} />
-                                        </Tabs.TabPanel>
-                                    </Tabs.Tab>
-                                ))}
-                            </Tabs>
-                            */}
 
                             <div>
+
+                                {
+                                    /*
+                                    <POSComponent componentName="Tabs">
+                                        {
+                                            data.map(region => (
+                                                <POSComponent componentName="Tabs.Tab" id="tab1" label={region.regionid} >
+                                                    <POSComponent componentName="Tabs.TabPanel">
+                                                    </POSComponent>
+                                                </POSComponent>
+
+                                            ));
+
+                                    }
+                                    </POSComponent>
+                                    */
+                                }
+
+
 
                                 <Tabs>
                                     {data.map(region => (
@@ -346,6 +364,7 @@ class Covid extends React.Component {
                                     ))}
 
                                 </Tabs>
+
                             </div>
 
 
