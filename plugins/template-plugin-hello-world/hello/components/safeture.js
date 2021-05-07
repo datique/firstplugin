@@ -258,20 +258,23 @@ class Covid extends React.Component {
         } else {
             return (
 
-
                 <div>
-
-
                     <div>
-                        <input type='image' height='35px' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
-                        {/*<input type='button' value='Send' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' /> */}
+                        {!windowOpened &&
+                            <input type='image' height='35px' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
+                        }
+                        {windowOpened &&
+                            <input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} />
+                        }
                     </div>
 
-                    {
+
+                    {/*
                         windowOpened &&
                         <div>
                             <input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} />
                         </div>
+                        */
                     }
                     {
                         windowOpened && !hasPnr &&
