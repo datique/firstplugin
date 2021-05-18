@@ -259,12 +259,19 @@ class Covid extends React.Component {
             return (
 
                 <div>
-                    <div>
+                    <div style={{ width: '965px' }}>
                         {!windowOpened &&
                             <input type='image' height='35px' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
                         }
                         {windowOpened &&
-                            <input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} />
+                            <div>
+                                <svg height='10' width='10' fill="#000000" viewBox="0 0 12 12" role='button' style={{ float: 'right', cursor: 'pointer' }} onClick={this.onCloseWindowHandler}>
+                                    <rect width="2" height="13.9975" rx="1" transform="matrix(0.707107 0.707107 -0.70711 0.707104 10.252 0.355682)"></rect>
+                                    <path d="M1.05257 2.46076C0.661638 2.07065 0.661309 1.43781 1.05183 1.04729V1.04729C1.44236 0.656763 2.07585 0.656433 2.46678 1.04655L10.9612 9.5233C11.3521 9.91342 11.3525 10.5463 10.962 10.9368V10.9368C10.5714 11.3273 9.93793 11.3276 9.547 10.9375L1.05257 2.46076Z">
+                                    </path>
+                                </svg>
+                                {/*<input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} /> */}
+                            </div>
                         }
                     </div>
 
