@@ -10,6 +10,15 @@ http.createServer(function (req, res) {
     var json = "";
     //var length = 0;
 
+
+    if (needCacheRefresh()) {
+        UpdateCache();
+    }
+    else {
+        console.log('Cache up-to-date');
+    }
+
+
     if (req.url === '/') {
         json = GetData();
 
@@ -49,52 +58,89 @@ http.createServer(function (req, res) {
 
         sendResponse(res, json);
     } else if (req.url === '/safeture') {
-        //GetDataFromAPI();
-        getAccessToken()
-            .then((data) => {
-                //console.log(data)
-                var json = JSON.parse(data);
-
-
-                getApiData(json.data).then((data2) => {
-                    //console.log("2nd call");
-                    //console.log(data2);
-                    //var json = data2.toString('utf8');
-                    sendResponse(res, data2);
-                });
-
-
-
-                //res.end();
-                //sendResponse(res, json.data);
-            });
-
-
+        GetSafetureData(res);
+    } else if (req.url === '/updatecache') {
+        UpdateCache();
     }
-
-
-
-
-    /*
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Request-Method', 'GET, POST');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('transfer-encoding', '');
-
-    res.writeHead(200, {});
-
-    res.write(json)
-
-    res.end();
-    */
-
-
 
 }).listen(8081);
 
+function needCacheRefresh() {
+
+
+    if (fs.existsSync('covid19.json')) {
+        const stats = fs.statSync('covid19.json');
+
+        const lastUpdated = stats.mtime.getTime();
+
+        const now = new Date().getTime();
+
+        var diff = Math.ceil(now - lastUpdated);
+
+        console.log('Cache Last Updated:' + stats.mtime);
+
+        const hours = Math.floor(diff / (1000 * 3600));
+
+        if (hours > 12)
+            return true;
+        else
+            return false;
+    }
+    else {
+        return true;
+    }
+
+}
+
+
+function UpdateCache() {
+    getAccessToken()
+        .then((data) => {
+            var json = JSON.parse(data);
+
+            getApiData(json.data).then((data2) => {
+
+                fs.writeFileSync('covid19.json', data2);
+
+                console.log('Cache updated');
+
+            }).catch(function (e) {
+                console.log('promise rejected 1:' + e);
+            });
+
+        }).catch(function () {
+            console.log('promise rejected');
+        }).catch(function () {
+            console.log('promise rejected 2');
+        });
+}
+
+function GetSafetureData(res) {
+    getAccessToken()
+        .then((data) => {
+            var json = JSON.parse(data);
+
+            getApiData(json.data).then((data2) => {
+
+
+
+                fs.writeFileSync('covid19.json', data2);
+
+                sendResponse(res, data2);
+
+            }).catch(function (e) {
+                console.log('promise rejected 1:' + e);
+            });
+
+        }).catch(function () {
+            console.log('promise rejected');
+        }).catch(function () {
+            console.log('promise rejected 2');
+        });
+}
 
 function sendResponse(res, data) {
+
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Request-Method', 'GET, POST');
     res.setHeader('Access-Control-Allow-Headers', '*');
@@ -229,92 +275,117 @@ function GetDataFromAPI() {
 
 function GetData() {
 
-    let rawdata = fs.readFileSync('covid19.json');
-    let data = JSON.parse(rawdata);
+    if (fs.existsSync('covid19.json')) {
 
-    var json = "";
-    //var json = JSON.stringify(data)
-    //console.log(json)
+        let rawdata = fs.readFileSync('covid19.json');
+        let data = JSON.parse(rawdata);
 
-    //json = "{ 'test' : '123'}";
+        var json = "";
+        //var json = JSON.stringify(data)
+        //console.log(json)
 
-    json = rawdata.toString('utf8');
+        //json = "{ 'test' : '123'}";
 
-
-
-    return json.toString('utf8');
-}
-
-function GetRegions() {
-    let rawdata = fs.readFileSync('covid19.json');
-    let data = JSON.parse(rawdata);
+        json = rawdata.toString('utf8');
 
 
-    var regions = data.data.map((data) => ({ 'regionid': data.iso3166_1, 'region': data.regionid }));
 
-
-    var json = JSON.stringify(regions);
-
-    return json.toString('utf8');;
-
-}
-
-function GetDataByRegions(regionIds) {
-    console.log(regionIds);
-
-    let rawdata = fs.readFileSync('covid19.json');
-    let data = JSON.parse(rawdata);
-
-    var values = regionIds.split(',');
-
-    var json = "";
-    var matches = [];
-
-    for (var i = 0; i < values.length; i++) {
-        var match = data.data.myFind({ iso3166_1: values[i] });
-
-        if (match.length > 0) {
-            matches.push(match[0]);
+        return json.toString('utf8');
+    else {
+            return "File cache not found, please refresh to force the cache update";
         }
     }
 
+    function GetRegions() {
 
-    if (matches.length > 1) {
-        json = JSON.stringify(matches);
+        if (fs.existsSync('covid19.json')) {
+
+            let rawdata = fs.readFileSync('covid19.json');
+            let raw = JSON.parse(rawdata);
+
+            var data = raw.data;
+
+            //var regions = data.data.map((data) => ({ 'regionid': data.iso3166_1, 'region': data.regionid }));
+            var regions = data.data.map((data) => ({ 'regionid': data.iso3166_1, 'region': data.regionid }));
+
+
+            var json = JSON.stringify(regions);
+
+            return json.toString('utf8');
+        }
+        else {
+            return "File cache not found, please refresh to force the cache update";
+        }
+
     }
-    else
-        console.log("not found");
 
-    return json.toString('utf8');
-}
-
-function GetDataByRegion(regionId) {
-    console.log(regionId);
-
-    let rawdata = fs.readFileSync('covid19.json');
-    let data = JSON.parse(rawdata);
+    function GetDataByRegions(regionIds) {
 
 
+        console.log(regionIds);
 
-    var json = "";
+        let rawdata = fs.readFileSync('covid19.json');
+        let raw = JSON.parse(rawdata);
+
+        var data = raw.data;
+
+        var values = regionIds.split(',');
+
+        var json = "";
+        var matches = [];
+
+        for (var i = 0; i < values.length; i++) {
+            var match = data.data.myFind({ iso3166_1: values[i] });
+
+            if (match.length > 0) {
+                matches.push(match[0]);
+            }
+        }
 
 
-    var match = data.data.myFind({ iso3166_1: regionId });
+        if (matches.length > 1) {
+            json = JSON.stringify(matches);
+        }
+        else
+            console.log("not found");
 
-    if (match.length > 0) {
-        json = JSON.stringify(match[0]);
+        return json.toString('utf8');
     }
-    else
-        console.log("not found");
 
-    return json.toString('utf8');
-}
+    function GetDataByRegion(regionId) {
+        if (!fs.existsSync('covid19.json')) {
+            UpdateCache();
+        }
 
-Array.prototype.myFind = function (obj) {
-    return this.filter(function (item) {
-        for (var prop in obj)
-            if (!(prop in item) || obj[prop] !== item[prop])
-                return false;
-        return true;
-    });
-};
+        console.log(regionId);
+
+        let rawdata = fs.readFileSync('covid19.json');
+
+
+        let raw = JSON.parse(rawdata);
+
+        var data = raw.data;
+
+
+        var json = "";
+
+
+        var match = data.data.myFind({ iso3166_1: regionId });
+
+        if (match.length > 0) {
+            json = JSON.stringify(match[0]);
+        }
+        else
+            console.log("not found");
+
+        return json.toString('utf8');
+    }
+
+    Array.prototype.myFind = function (obj) {
+        return this.filter(function (item) {
+            for (var prop in obj)
+                if (!(prop in item) || obj[prop] !== item[prop])
+                    return false;
+            return true;
+        });
+    };
