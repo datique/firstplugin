@@ -144,7 +144,7 @@ class Covid extends React.Component {
     }
 
     getRegions(regionIds) {
-        this.setState({ isLoadedDetails: false });
+
 
         fetch("http://localhost:8081/regions/" + regionIds)
             .then(res => res.json())
@@ -213,6 +213,8 @@ class Covid extends React.Component {
         const { activePNR } = state.plugins.pnrRetrieve || {};
 
         const currentPnr = activePNR[hostConnectionId];
+
+        this.setState({ isLoadedDetails: false });
 
         if (currentPnr) {
             const airSegments = currentPnr.airSegments;
