@@ -25,7 +25,8 @@ class Covid extends React.Component {
             firstLoad: true,
             hasPnr: false,
             pnrOpened: false,
-            windowOpened: false
+            windowOpened: false,
+            airlineSafetyData: []
         };
 
 
@@ -92,6 +93,34 @@ class Covid extends React.Component {
                     });
                 }
             )
+
+
+    }
+
+    getAirlineSafetyData(carriers) {
+
+        //this.setState({ isLoadedDetails: false, firstLoad: false });
+
+        fetch("http://localhost:8081/asa/" + carriers)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        airlineSafetyData: result,
+                        showLoading: false,
+
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        showLoading: false,
+                        error,
+                    });
+                }
+            )
+
     }
 
     getRegion(regionId) {
@@ -198,12 +227,14 @@ class Covid extends React.Component {
             this.setState({ hasPnr: true, windowOpened: true });
         }
         else {
+            this.getAirlineSafetyData('');
             this.setState({ hasPnr: false, windowOpened: true });
         }
     }
 
     getSegmentData(airSegments) {
         var countryCodes = [];
+        var carrierCodes = [];
 
         for (var key in airSegments) {
             if (airSegments.hasOwnProperty(key)) {
@@ -226,8 +257,11 @@ class Covid extends React.Component {
 
         if (countryCodes && countryCodes.length > 0) {
             this.getRegions(countryCodes.join());
+
             this.setState({ hasPnr: true });
         }
+
+
     }
 
 
@@ -237,7 +271,7 @@ class Covid extends React.Component {
     render() {
 
         const { POSComponent } = this._uiHelper;
-        const { windowOpened, pnrLoaded, hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data } = this.state;
+        const { windowOpened, pnrLoaded, hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data, airlineSafetyData } = this.state;
 
         const test = this._diHelper.get('PNR');
 
@@ -288,7 +322,7 @@ class Covid extends React.Component {
                         <div>
 
 
-                            <select onChange={this.onRegionChangeHandler}>
+                            <select onChange={this.onRegionChangeHandler} >
                                 <option key='a-0' selected='selected' value={''}>Select a Region</option>
                                 {regions.map(item => (
                                     <option key={item.regionid} value={item.regionid}>
@@ -310,27 +344,99 @@ class Covid extends React.Component {
 
                     {
                         windowOpened && !hasPnr && isLoadedDetails &&
-                        <div style={{ display: !isLoadedDetails ? "none" : "block" }}>
-                            <div style={{ width: '965px' }} >
-                                <h1>{details.regionid} ({details.trend.value}%)</h1>
-                                <div dangerouslySetInnerHTML={{ __html: details.trend.description }} />
-                                <br />
 
-                                <div style={{ height: '200px', overflowY: 'scroll', borderColor: 'olive', borderStyle: 'solid', padding: '10px' }}>
-                                    {details.data.map(data => (
-                                        <div>
-                                            <h1>{data.title.toUpperCase()}</h1>
-                                            <div dangerouslySetInnerHTML={{ __html: data.description }} />
+
+
+                        <>
+                            <div style={{ padding: '10px', border: '1px olive solid', borderRadius: '3px', display: 'inline-block', width: '965px', marginTop: '13px', background: 'white' }}>
+
+                                <POSComponent componentName="Tabs">
+                                    <POSComponent componentName="Tabs.Tab" id={details.regionid} label={details.regionid} >
+                                        <POSComponent componentName="Tabs.TabPanel">
+                                            <h1>{details.regionid} ({details.trend.value}%)</h1>
+                                            <div dangerouslySetInnerHTML={{ __html: details.trend.description }} />
                                             <br />
 
-                                        </div>
-                                    ))}
+                                            <div style={{ height: '200px', overflowY: 'scroll', borderColor: 'olive', borderStyle: 'solid', padding: '10px' }}>
+                                                {details.data.map(data => (
+                                                    <div>
+                                                        <h1>{data.title.toUpperCase()}</h1>
+                                                        <div dangerouslySetInnerHTML={{ __html: data.description }} />
+                                                        <br />
 
-                                </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </POSComponent>
+                                    </POSComponent>
 
+                                    <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety Data' >
+                                        <POSComponent componentName="Tabs.TabPanel">
+
+
+                                            <div style={{ height: '400px', overflowY: 'scroll', padding: '10px' }}>
+                                                <table style={{ width: '100%', backgroundColor: '#f7e4cb', borderCollapse: 'collapse' }}>
+
+                                                    <tr>
+                                                        <th style={{ border: '1px solid #0b1119', padding: '0.769em 1em' }}>
+                                                            Airline
+                                                        </th>
+                                                        <th style={{ border: '1px solid #0b1119', padding: '0.769em 1em' }}>Attributes</th>
+                                                    </tr>
+                                                    {airlineSafetyData.map(data => (
+                                                        <tr>
+                                                            <td style={{ border: '1px solid #0b1119', width: '25%', padding: '0.769em 1em' }}>
+                                                                {data.carrierName} ({data.carrierCode})
+                                                             </td>
+                                                            <td style={{ border: '1px solid #0b1119', padding: '0.769em 1em' }}>
+                                                                <img height='55px' style={{ display: data.mandatoryMask ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-face-masks.svg' />
+                                                                <img height='55px' style={{ display: data.tempChecks ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-temperature-checks.svg' />
+                                                                <img height='55px' style={{ display: data.healthCert ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-health-cert.svg' />
+                                                                <img height='55px' style={{ display: data.hepaFilters ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-hepa-filters.svg' />
+                                                                <img height='55px' style={{ display: data.extraCleaning ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-extra-cleaning.svg' />
+                                                                <img height='55px' style={{ display: data.reducedMeals ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-food-beverage.svg' />
+                                                                <img height='55px' style={{ display: data.amenityKit ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-amenity-kit.svg' />
+                                                                <img height='55px' style={{ display: data.updatedBoarding ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-updated-boarding.svg' />
+                                                                <img height='55px' style={{ display: data.cabinBagsRestricted ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-cabin-bags-restricted.svg' />
+
+                                                            </td>
+                                                        </tr>
+
+                                                    ))}
+                                                </table>
+                                            </div>
+                                        </POSComponent>
+                                    </POSComponent>
+
+                                </POSComponent>
                             </div>
 
-                        </div>
+                            {
+                                /*
+                                                        <div style={{ display: !isLoadedDetails ? "none" : "block" }}>
+                                                            <div style={{ width: '965px' }} >
+                                                                <h1>{details.regionid} ({details.trend.value}%)</h1>
+                                                                <div dangerouslySetInnerHTML={{ __html: details.trend.description }} />
+                                                                <br />
+                            
+                                                                <div style={{ height: '200px', overflowY: 'scroll', borderColor: 'olive', borderStyle: 'solid', padding: '10px' }}>
+                                                                    {details.data.map(data => (
+                                                                        <div>
+                                                                            <h1>{data.title.toUpperCase()}</h1>
+                                                                            <div dangerouslySetInnerHTML={{ __html: data.description }} />
+                                                                            <br />
+                            
+                                                                        </div>
+                                                                    ))}
+                            
+                                                                </div>
+                            
+                                                            </div>
+                            
+                                                        </div>
+                                                        */
+                            }
+                        </>
                     }
 
                     {

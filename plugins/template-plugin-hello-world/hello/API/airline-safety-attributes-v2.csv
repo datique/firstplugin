@@ -1,0 +1,101 @@
+﻿Airline_Name,Carrier_Code,Region,Middle_Seat_Blocked,Mandatory_Mask,Temp_Checks,Health_Cert,HEPA_Filters,Extra_Cleaning,Reduced_Onboard,Amenity_Kit,Updated_Boarding,Cabin_Bags_Restricted,Airline_Program_Name,Airline_Program_Webpage
+AerolineasArgentinas,AR,Americas,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Ready To Take Care Of You,https://www.aerolineas.com.ar/en-ar/landingsespeciales/landings/778_ready-to-take-care-of-you
+AeroMexico,AM,Americas,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,No,Your Safety Is Our Top Priority ,https://aeromexico.com/en-us/health-and-sanitization-measures
+AviancaAirlines,AV,Americas,No,Yes,No,No,Yes,Yes,Yes,No,Yes,No,BioCare,https://www.avianca.com/us/en/experience/avianca-biocare/#biocare
+Air Canada,AC,Americas,No,Yes,Yes,No,Yes,Yes,Yes,No,No,No,CleanCare+,https://www.aircanada.com/us/en/aco/home/book/travel-news-and-updates/2020/covid-19.html
+Air transat,TS,Americas,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Traveller Care,https://www.airtransat.com/en-CA/Travel-information/Notice-to-Travellers?_ga=2.42436652.826650883.1613513259-896226502.1611682894&_gl=1*cxpvi1*_ga*ODk2MjI2NTAyLjE2MTE2ODI4OTQ.*_ga_TDJLXQBG09*MTYxMzUxMzI1OC4xLjEuMTYxMzUxMzI2MC41OA..
+Alaska Airlines,AS,Americas,No,Yes,No,Yes,Yes,Yes,Yes,No,No,No,Next-Level Care,https://www.alaskaair.com/content/advisories/coronavirus
+American Airlines,AA,Americas,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,Our Clean Committ,https://www.aa.com/i18n/travel-info/coronavirus-updates.jsp
+CopaAirlines,CM,Americas,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,COVID-19 Information Hub,https://www.copaair.com/en/web/us/coronavirus-updates
+Delta ,DL,Americas,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Delta CareStandard,https://www.delta.com/us/en/travel-planning-center/travel-planning-overview
+Frontier ,F9,Americas,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Committed to You,https://www.flyfrontier.com/committed-to-you/
+GOL Linhas Aereas,G3,Americas,No,Yes,No,No,Yes,Yes,No,No,No,No,GOL Commitment,https://www.voegol.com.br/en/information/take-care-of-your-health-during-your-trip
+Hawaiian Airlines,HA,Americas,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,Keeping You Safe,https://www.hawaiianairlines.com/KeepingYouSafe
+jetBlue ,B6,Americas,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Safety from the Ground Up,https://www.jetblue.com/safety
+LATAM Airlines,LA,Americas,No,Yes,No,No,Yes,Yes,Yes,No,Yes,Yes,Precautions Onboard,https://www.latam.com/en_us/experience/coronavirus/precautions-on-board/
+Southwest ,WN,Americas,No,Yes,No,No,Yes,Yes,Yes,No,Yes,No,Southwest Promise,https://www.southwest.com/promise/
+Spirit ,NK,Americas,No,Yes,No,Yes,Yes,Yes,No,No,Yes,No,COVID-19 Information Center,https://www.spirit.com/notices
+Sun Country Airlines,SY,Americas,No,Yes,No,Yes,Yes,Yes,Yes,No,No,No,Safety Update ,https://www.suncountry.com/safety-updates
+United ,UA,Americas,No,Yes,No,No,Yes,Yes,No,No,No,No,CleanPlus,https://www.united.com/ual/en/us/fly/travel/what-to-expect.html
+WestJet,WS,Americas,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Safety Above All ,https://www.westjet.com/en-ca/prepare/safety
+Air China ,CA,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Fly with a Peace of Mind,https://www.airchina.hk/HK/GB/promotion/Passengers
+Air India,AI,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,We Care,http://www.airindia.in/We-Care.htm
+Air New Zealand,NZ,APAC,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,Safe journey with Air New Zealand,https://www.airnewzealand.com.hk/safe-journey-with-air-new-zealand
+All Nippon Airways,NH,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,ANA Care Promise,https://www.ana.co.jp/en/jp/topics/notice200502/
+Asiana Airlines,OZ,APAC,No,Yes,Yes,No,Yes,Yes,Yes,No,No,No,Asiana strives for the day we all fly stress-free together!,https://flyasiana.com/C/US/EN/customer/notice/detail?id=CM202005070001212959
+Air Astana ,KC,APAC,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,,https://airastana.com/kaz/en-us/Information/Important-Notices/Travel-Safety-Measures-in-the-Time-of-COVID-19
+Bangkok Airways,PG,APAC,No,Yes,Yes,Yes,No,Yes,Yes,No,No,No,Travel Safe with Us,https://www.bangkokair.com/eng/Announcement/view/bangkok-airways-enhances-precautionary-measures-and-social-distancing-practices
+Cathay Pacific Airlines,CX,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Fly confidently with Cathay Care,https://www.cathaypacific.com/cx/en_HK/flying-with-us/cathaycare.html
+China Airlines,CI,APAC,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,We Treasure Each Encounter,https://www.china-airlines.com/us/en/discover/news/travel-advisory/we-treasure-each-encounter
+China Eastern Airlines,MU,APAC,No,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,China Eastern - Caring More About You,https://hk.ceair.com/newwebsite/hk/prevention/pc/indexEn.html
+China Southern Airlines,CZ,APAC,No,Yes,Yes,Yes,No,No,Yes,No,No,No,,https://www.csair.com/en/about/news/news/2020/1dvt9t78qmepm.shtml
+Eva Airways,BR,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,C+ Travel – Safe Travel Plan,https://www.evaair.com/en-global/customer-services/covid-19-information-center/cplus-travel-safe-travel-plan/
+Garuda Indonesia ,GA,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,,https://www.garuda-indonesia.com/hk/en/news-and-events/kebijakan-operasional-terkait-covid19
+Hong Kong Airlines,HX,APAC,No,Yes,Yes,No,No,Yes,Yes,Yes,Yes,No,Safe Travels,https://hx.hongkongairlines.com/en_HK/fly-with-us/our-services/flysafe
+Indigo Air,6E,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,IndiGo your lean clean flying machine.,https://www.goindigo.in/lean-clean-flying-machine.html
+Japan Airlines,JL,APAC,No,Yes,Yes,No,Yes,Yes,No,No,Yes,Yes,A new travel experience with safety as our number one priority,https://www.jal.co.jp/jp/en/info/2020/other/flysafe/protection-measures/index.html
+Jeju Air ,7C,APAC,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Safe & Healthy A New Standard of Travel,https://www.jejuair.net/jejuair/en/event/safeHealthy.do
+Korean Airlines,KE,APAC,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Care First,https://www.koreanair.com/global/en/2020_07_carefirst.html
+Malaysia Airlines,MH,APAC,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Fly Confidently,https://www.malaysiaairlines.com/my/en/campaign/fly-with-confidence.html
+Malindo Air ,OD,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Always Safety First,https://www.malindoair.com/news-events/Covid19-Safety-First
+Philippine Airlines,PR,APAC,No,Yes,Yes,No,Yes,Yes,Yes,No,No,Yes,Keeping You Safe Always,https://www.philippineairlines.com/en/ph/home/covid-19/newnormalexperience
+Qantas Airways,QF,APAC,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Fly Well,https://www.qantas.com/au/en/travel-info/travel-updates/coronavirus/health-while-flying.html?int_cam=au%3Acoronavirus%3Aarticle%3Afly-well%3Aen%3Ann
+Shandong Airlines ,SC,APAC,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,,http://www.sda.cn/about/news/2706.html
+Shenzhen Airlines ,ZH,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,,http://shenzhenair.com/szair_B2C/getCateMsgList.action?channel=1
+Singapore And Silkair,SQ,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Safe and seamless travel with #SIAcares,https://www.singaporeair.com/en_UK/sg/travel-info/covid19-measures/
+Sri Lankan Airlines,UL,APAC,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Enhanced Safety Measure for Passengers,https://www.srilankan.com/en_uk/corporate/covid-update
+Thai Airways,TG,APAC,No,No,Yes,No,Yes,Yes,Yes,No,No,No,Ensure Hygiene Excellence Because We Care,https://www.thaiairways.com/en/news/news_announcement/news_detail/HygieneExcellence.page
+Vietnam Airlines ,VN,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,Travel with Confidence,https://www.vietnamairlines.com/en/sites/an-toan-trai-nghiem
+Virgin Australia,VA,APAC,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Your peace of mind is our priority,https://travel.virginaustralia.com/au/coronavirus-update/health-wellbeing?icmpid=va|c_mar|gl_hp|l1|health_wellb|jun20
+Vistara,UK,APAC,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Let's make flying feel safe again,https://www.airvistara.com/th/coronavirus-update  
+Aegean Air,A3,Europe,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,Together with care,https://en.aegeanair.com/togetherwithcare/your-health-and-safety/
+Aer Lingus,EI,Europe,No,Yes,No,No,Yes,Yes,Yes,No,Yes,No,,https://blog.aerlingus.com/new-measures-for-your-wellbeing-and-safety/
+Aeroflot ,SU,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,,https://www.aeroflot.ru/xx-en/covid-19
+Air Europa,UX,Europe,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,,https://www.aireuropa.com/uk/en/aea/info.html
+Air France,AF,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Air France Protect,https://www.airfrance.fr/FR/en/common/page_flottante/information/coronavirus.htm
+Alitalia Airlines,AZ,Europe,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,,https://www.alitalia.com/en_en/fly-alitalia/news-and-activities/news/info-flights/flying-safely.html
+Austrian Airlines,OS,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Safe Travel With Austrian Airlines,https://www.austrian.com/gb/en/travel-coronatimes
+Belavia,B2,Europe,No,Yes,No,No,Yes,Yes,Yes,Yes,No,No,,https://en.belavia.by/company/covid_policy_quality_safety/
+British Airways,BA,Europe,No,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,,https://www.britishairways.com/en-gb/information/the-ba-experience/welcome-on-board
+Brussels Airlines,SN,Europe,No,Yes,Yes,No,Yes,Yes,Yes,Yes,Yes,No,Travel Care Free,https://www.brusselsairlines.com/en-uk/travel-safely/measures.aspx
+Condor,DE,Europe,No,Yes,No,No,Yes,Yes,Yes,No,Yes,Yes,Carefree travel,https://www.condor.com/us/flight-preparation/at-the-airport/protective-measures.jsp
+CSA Czech Airlines,OK,Europe,No,Yes,No,No,Yes,Yes,Yes,No,Yes,No,,https://www.csa.cz/gb-en/covid-19/
+easyJet,U2,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,fly with confidence,https://www.easyjet.com/en/fly-with-confidence
+Finnair,AY,Europe,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,Yes,Fly With Confidence,https://www.finnair.com/en/flight-information/fly-with-confidence
+Iberia Airlines,IB,Europe,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,,https://www.iberia.com/gb/en/covid-19/measures-taken/
+Iceland Air,FI,Europe,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,,https://www.icelandair.com/en-gb/support/covid-19/safe-travels-shared-responsibility/
+Jet2.Com Airlines,LS,Europe,No,Yes,No,No,Yes,Yes,No,No,Yes,No,,https://www.jet2.com/en/flights/safe-travel/in-the-air
+KLM,KL,Europe,No,Yes,No,No,Yes,Yes,No,No,No,No,,https://www.klm.co.uk/information/faq/airport-on-board
+LOT Polish Airlines,LO,Europe,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,Fly Safe Fly LOT,https://www.lot.com/gb/en/fly-safe-fly-lot
+Lufthansa,LH,Europe,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,Yes,#WeCare,https://www.lufthansa.com/xx/en/protection-measures
+Pegasus Airlines,PC,Europe,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,Yes,,https://www.flypgs.com/en/coronavirus-measures-and-our-disinfection-procedure
+Ryanair,FR,Europe,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,No,,https://www.ryanair.com/ie/en/useful-info/healthy-flying
+SAS,SK,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,SAS SAFE TRAVEL,https://www.flysas.com/gb-en/safe-travel/
+Swiss,LX,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,,https://www.swiss.com/gb/EN/various/travel-safely
+TAP Portugal,TP,Europe,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,No,TAP Clean & Safe,https://www.flytap.com/en-pt/recommendations-covid-19
+Tarom,RO,Europe,No,Yes,No,No,Yes,Yes,Yes,No,Yes,Yes,Flying together again!,https://www.tarom.ro/sites/default/files/prezentare_masuri_protectie_engleza_1.pdf
+Turkish Airlines,TK,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,https://www.turkishairlines.com/en-ie/guidelines-for-safe-travel/
+Ukraine International,PS,Europe,No,Yes,Yes,No,Yes,Yes,Yes,No,Yes,No,Fly Healthy,https://www.flyuia.com/uk/en/information/fly-healthy
+Ural Airlines,U6,Europe,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,No,,https://www.uralairlines.ru/en/fly-to-health/
+Virgin Atlantic,VS,Europe,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,You're in Safe Hands,https://flywith.virginatlantic.com/gb/en/youre-in-safe-hands.html
+Vueling Airlines,VY,Europe,No,Yes,No,Yes,Yes,Yes,No,Yes,Yes,No,Ready for you,https://www.vueling.com/en/passengers/covid-prevention-and-measures/
+Comair Limited / kulula.com,MN,MEA,No,Yes,No,Yes,Yes,Yes,Yes,No,No,No,Taking to the Skies Again ,https://www.comair.co.za/taking-to-the-skies-again
+flydubai,FZ,MEA,No,Yes,Yes,Yes,No,No,Yes,No,No,No,,https://www.flydubai.com/en/plan/covid-19/travelling-during-covid-19
+EGYPTAIR,MS,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,https://www.egyptair.com/en/about-egyptair/news-and-press/Pages/COVID%2019%20HYGIENE%20MEASURES.aspx
+Emirates,EK,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,Your safe journey,https://www.emirates.com/nl/english/help/your-safety/
+Ethiopian Airlines,ET,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,ET Cares,https://www.ethiopianairlines.com/aa/travel-updates/updates-on-covid-19(coronavirus)
+Etihad Airways,EY,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,,https://www.etihad.com/en-ae/fly-etihad/health-and-wellness
+Gulf Air,GF,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,,https://www.gulfair.com/covid19
+Jazeera Airways,J9,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,,https://www.jazeeraairways.com/en-kw/plan/book/passenger-travel-information
+Kenya Airways,KQ,MEA,No,Yes,Yes,Yes,Yes,Yes,No,No,Yes,No,KQ Cares,https://www.kenya-airways.com/en-ke/covid-19
+Kuwait Airways,KU,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,https://www.kuwaitairways.com/en/information/usefulinfo/Pages/Covid19-Safety-Information.aspx
+Middle East Airlines,ME,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Travel Guidelines,https://www.mea.com.lb/english/covid19-and-travel/travel-guidelines
+Oman Aviationco,WY,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,COVID-19  SAFETY MEASURES,https://www.omanair.com/gbl/en/covid19-safety-measures
+PIA,PK,MEA,No,Yes,Yes,Yes,No,Yes,Yes,No,No,No,,https://www.piac.com.pk/travel-update-and-information
+Qatar Airways,QR,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Safety Measures,https://www.qatarairways.com/en/safety-measures.html
+Royal Air Maroc,AT,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,SANITARY MEASURES,https://www.royalairmaroc.com/uk-en/at-the-agency
+Royal Jordanian,RJ,MEA,No,Yes,Yes,No,Yes,Yes,Yes,No,No,Yes,Safety Measures,https://rj.com/en/safety-measures
+Rwandair,WB,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,Five-Step Health & Safety Guide,https://www.rwandair.com/information/prepare-to-fly/five-step-health-safety-guide-2/
+Saudi Arabian,SV,MEA,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Safe Travel with SAUDIA,https://www.saudia.com/covid-19
+South African,SA,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,SAA’s Response to Coronavirus,https://www.flysaa.com/manage-fly/before-flying/health/novel-coronavirus?inheritRedirect=true
+TAAG Angola,DT,MEA,No,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,Yes,TRAVEL SAFELY,http://www.taag.com/en/Info/Fly-with-TAAG-in-complete-safety
