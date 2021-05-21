@@ -393,6 +393,7 @@ function GetAirlineSafetyData(carriers) {
                 'amenityKit': d[10].toUpperCase() == 'YES' ? true : false,
                 'updatedBoarding': d[11].toUpperCase() == 'YES' ? true : false,
                 'cabinBagsRestricted': d[12].toUpperCase() == 'YES' ? true : false,
+                'moreInfoLink': d[14]
 
             });
         }
