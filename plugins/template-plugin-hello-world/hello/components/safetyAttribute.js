@@ -9,7 +9,7 @@ class ASF extends React.Component {
     }
     render() {
         return (
-            <div style={{ height: '400px', overflowY: 'scroll', padding: '10px' }}>
+            <div style={{ maxHeight: '400px', overflowY: 'auto', padding: '10px' }}>
                 <table style={{ width: '100%', backgroundColor: '#f7e4cb', borderCollapse: 'collapse' }}>
 
                     <tr>

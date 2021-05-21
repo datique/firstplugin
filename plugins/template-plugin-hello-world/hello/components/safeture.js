@@ -244,6 +244,10 @@ class Covid extends React.Component {
                 if (!countryCodes.includes(code))
                     countryCodes.push(code);
 
+                if (!carrierCodes.includes(segment.carrierCode))
+                    carrierCodes.push(segment.carrierCode);
+
+
                 console.log(key + " -> " + segment);
             }
         }
@@ -252,6 +256,7 @@ class Covid extends React.Component {
 
         if (countryCodes && countryCodes.length > 0) {
             this.getRegions(countryCodes.join());
+            this.getAirlineSafetyData(carrierCodes.join());
 
             this.setState({ hasPnr: true });
         }
@@ -367,9 +372,7 @@ class Covid extends React.Component {
 
                                 <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety Data' >
                                     <POSComponent componentName="Tabs.TabPanel">
-
                                         <ASF data={airlineSafetyData} />
-
                                     </POSComponent>
                                 </POSComponent>
 
@@ -389,7 +392,8 @@ class Covid extends React.Component {
 
                             <div>
 
-                                <div style={{ height: '300px', overflow: 'scroll' }}>
+                                <div style={{ height: '300px', overflow: 'auto', padding: '10px', border: '1px olive solid', borderRadius: '3px', display: 'inline-block', width: '965px', marginTop: '13px', background: 'white' }}>
+
                                     {
                                         <POSComponent componentName="Tabs">
                                             {data.map((region) => (
@@ -408,6 +412,12 @@ class Covid extends React.Component {
                                                     </POSComponent>
                                                 </POSComponent>
                                             ))}
+
+                                            <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety Data' >
+                                                <POSComponent componentName="Tabs.TabPanel">
+                                                    <ASF data={airlineSafetyData} />
+                                                </POSComponent>
+                                            </POSComponent>
                                         </POSComponent>
 
 
