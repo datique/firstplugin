@@ -1,11 +1,6 @@
 import React from 'react';
 import Tabs from "./Tabs";
-
-//import './Tabs.css'
-//import icon from '/plugins/template-plugin-hello-world/hello/images/icon.jpg'
-
-
-//require('../main.css')
+import ASF from "./safetyAttribute"
 
 class Covid extends React.Component {
 
@@ -347,96 +342,42 @@ class Covid extends React.Component {
 
 
 
-                        <>
-                            <div style={{ padding: '10px', border: '1px olive solid', borderRadius: '3px', display: 'inline-block', width: '965px', marginTop: '13px', background: 'white' }}>
 
-                                <POSComponent componentName="Tabs">
-                                    <POSComponent componentName="Tabs.Tab" id={details.regionid} label={details.regionid} >
-                                        <POSComponent componentName="Tabs.TabPanel">
-                                            <h1>{details.regionid} ({details.trend.value}%)</h1>
-                                            <div dangerouslySetInnerHTML={{ __html: details.trend.description }} />
-                                            <br />
+                        <div style={{ padding: '10px', border: '1px olive solid', borderRadius: '3px', display: 'inline-block', width: '965px', marginTop: '13px', background: 'white' }}>
 
-                                            <div style={{ height: '200px', overflowY: 'scroll', borderColor: 'olive', borderStyle: 'solid', padding: '10px' }}>
-                                                {details.data.map(data => (
-                                                    <div>
-                                                        <h1>{data.title.toUpperCase()}</h1>
-                                                        <div dangerouslySetInnerHTML={{ __html: data.description }} />
-                                                        <br />
+                            <POSComponent componentName="Tabs">
+                                <POSComponent componentName="Tabs.Tab" id={details.regionid} label={details.regionid} >
+                                    <POSComponent componentName="Tabs.TabPanel">
+                                        <h1>{details.regionid} ({details.trend.value}%)</h1>
+                                        <div dangerouslySetInnerHTML={{ __html: details.trend.description }} />
+                                        <br />
 
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </POSComponent>
+                                        <div style={{ height: '200px', overflowY: 'scroll', borderColor: 'olive', borderStyle: 'solid', padding: '10px' }}>
+                                            {details.data.map(data => (
+                                                <div>
+                                                    <h1>{data.title.toUpperCase()}</h1>
+                                                    <div dangerouslySetInnerHTML={{ __html: data.description }} />
+                                                    <br />
+
+                                                </div>
+                                            ))}
+                                        </div>
                                     </POSComponent>
-
-                                    <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety Data' >
-                                        <POSComponent componentName="Tabs.TabPanel">
-
-
-                                            <div style={{ height: '400px', overflowY: 'scroll', padding: '10px' }}>
-                                                <table style={{ width: '100%', backgroundColor: '#f7e4cb', borderCollapse: 'collapse' }}>
-
-                                                    <tr>
-                                                        <th style={{ border: '1px solid #0b1119', padding: '0.769em 1em' }}>
-                                                            Airline
-                                                        </th>
-                                                        <th style={{ border: '1px solid #0b1119', padding: '0.769em 1em' }}>Attributes</th>
-                                                    </tr>
-                                                    {airlineSafetyData.map(data => (
-                                                        <tr>
-                                                            <td style={{ border: '1px solid #0b1119', width: '25%', padding: '0.769em 1em' }}>
-                                                                {data.carrierName} ({data.carrierCode})
-                                                             </td>
-                                                            <td style={{ border: '1px solid #0b1119', padding: '0.769em 1em' }}>
-                                                                <img height='55px' style={{ display: data.mandatoryMask ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-face-masks.svg' />
-                                                                <img height='55px' style={{ display: data.tempChecks ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-temperature-checks.svg' />
-                                                                <img height='55px' style={{ display: data.healthCert ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-health-cert.svg' />
-                                                                <img height='55px' style={{ display: data.hepaFilters ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-hepa-filters.svg' />
-                                                                <img height='55px' style={{ display: data.extraCleaning ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-extra-cleaning.svg' />
-                                                                <img height='55px' style={{ display: data.reducedMeals ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-food-beverage.svg' />
-                                                                <img height='55px' style={{ display: data.amenityKit ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-amenity-kit.svg' />
-                                                                <img height='55px' style={{ display: data.updatedBoarding ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-updated-boarding.svg' />
-                                                                <img height='55px' style={{ display: data.cabinBagsRestricted ? '' : 'none' }} src='https://343aebb6912120aa54f4.b-cdn.net/wp-content/uploads/2021/02/covid-cabin-bags-restricted.svg' />
-
-                                                            </td>
-                                                        </tr>
-
-                                                    ))}
-                                                </table>
-                                            </div>
-                                        </POSComponent>
-                                    </POSComponent>
-
                                 </POSComponent>
-                            </div>
 
-                            {
-                                /*
-                                                        <div style={{ display: !isLoadedDetails ? "none" : "block" }}>
-                                                            <div style={{ width: '965px' }} >
-                                                                <h1>{details.regionid} ({details.trend.value}%)</h1>
-                                                                <div dangerouslySetInnerHTML={{ __html: details.trend.description }} />
-                                                                <br />
-                            
-                                                                <div style={{ height: '200px', overflowY: 'scroll', borderColor: 'olive', borderStyle: 'solid', padding: '10px' }}>
-                                                                    {details.data.map(data => (
-                                                                        <div>
-                                                                            <h1>{data.title.toUpperCase()}</h1>
-                                                                            <div dangerouslySetInnerHTML={{ __html: data.description }} />
-                                                                            <br />
-                            
-                                                                        </div>
-                                                                    ))}
-                            
-                                                                </div>
-                            
-                                                            </div>
-                            
-                                                        </div>
-                                                        */
-                            }
-                        </>
+                                <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety Data' >
+                                    <POSComponent componentName="Tabs.TabPanel">
+
+                                        <ASF data={airlineSafetyData} />
+
+                                    </POSComponent>
+                                </POSComponent>
+
+                            </POSComponent>
+                        </div>
+
+
+
                     }
 
                     {
