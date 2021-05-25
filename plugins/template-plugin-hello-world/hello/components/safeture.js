@@ -5,7 +5,7 @@ import ASF from "./safetyAttribute"
 class Covid extends React.Component {
 
 
-    constructor({ props, storeHelper, selectorsHelper, diHelper, uiHelper }) {
+    constructor({ props, storeHelper, selectorsHelper, diHelper, uiHelper, coreHelper, hostConnectionsHelper }) {
         super(props);
         this.state = {
             showLoading: false,
@@ -21,7 +21,8 @@ class Covid extends React.Component {
             hasPnr: false,
             pnrOpened: false,
             windowOpened: false,
-            airlineSafetyData: []
+            airlineSafetyData: [],
+            airSegments: [],
         };
 
 
@@ -36,6 +37,8 @@ class Covid extends React.Component {
         this._storeHelper = storeHelper;
         this._selectorsHelper = selectorsHelper;
         this._diHelper = diHelper;
+        this._coreHelper = coreHelper;
+        this._hostConnectionsHelper = hostConnectionsHelper;
 
         console.log("storeHelper:" + storeHelper);
 
@@ -184,6 +187,76 @@ class Covid extends React.Component {
 
     }
 
+    onAddRemarks = async (event) => {
+
+        const { storeHelper, selectorsHelper, coreHelper, hostConnectionsHelper } = this.props;
+        const { airlineSafetyData, airSegments } = this.state;
+
+        var remarks = [];
+
+        for (var key in airSegments) {
+            if (airSegments.hasOwnProperty(key)) {
+                var segment = airSegments[key];
+
+                var remark = [];
+                for (var i = 0; i < airlineSafetyData.length; i++) {
+                    var asf = airlineSafetyData[i];
+
+                    if (asf.carrierCode == segment.carrierCode) {
+
+                        if (asf.mandatoryMask)
+                            remark.push("MASKS");
+
+                        if (asf.tempChecks)
+                            remark.push("TEMP CHECKS");
+
+                        if (asf.healthCert)
+                            remark.push("HEALTH CERT");
+
+                        if (asf.extraCleaning)
+                            remark.push("EXTRA CLEANING");
+
+                        if (asf.updatedBoarding)
+                            remark.push("UPDATED BOARDING");
+
+                        if (asf.cabinBagsRestricted)
+                            remark.push("REDUCED BAGS");
+
+                    }
+
+                }
+
+                remarks.push(segment.segmentNumber + '*' + remark.join('/'));
+
+            }
+        }
+
+        var ri = [];
+
+        for (var i = 0; i < remarks.length; i++) {
+            ri.push('RI.S' + remarks[i]);
+        }
+
+
+
+        const state = storeHelper.getState();
+        const getDefaultHostConnectionId = selectorsHelper.make('getDefaultHostConnectionId');
+        const defaultHostConnectionId = getDefaultHostConnectionId(state);
+        var command = ri.join('+');
+
+        console.log('remarks:' + command);
+
+        const sendHostConnectionEntry = () =>
+            coreHelper.invoke('sendHostConnectionEntry', defaultHostConnectionId, command);
+        const result = await hostConnectionsHelper.withHostConnectionQueueing({
+            hostConnectionId: defaultHostConnectionId,
+        })(sendHostConnectionEntry);
+
+        console.log('Host Response:' + result);
+        //setOutput(result);
+
+    }
+
     onClickHandler = (event) => {
         //alert('onClickHandler');
 
@@ -221,7 +294,7 @@ class Covid extends React.Component {
 
 
             this.getSegmentData(airSegments);
-            this.setState({ hasPnr: true, windowOpened: true });
+            this.setState({ hasPnr: true, windowOpened: true, airSegments: airSegments });
         }
         else {
             this.getAirlineSafetyData('');
@@ -286,7 +359,6 @@ class Covid extends React.Component {
 
 
 
-
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (showLoading) {
@@ -295,6 +367,7 @@ class Covid extends React.Component {
             return (
 
                 <div>
+
                     <div style={{ width: '965px' }}>
                         {!windowOpened &&
                             <input type='image' height='35px' onClick={this.onClickHandler} src='https://cdn.travelport.com/mp3de74868bfa647c9b5a04aeb642948fc/MP3de74868-bfa6-47c9-b5a0-4aeb642948fc_general_thumbnail_192988.jpg' />
@@ -372,7 +445,7 @@ class Covid extends React.Component {
                                     </POSComponent>
                                 </POSComponent>
 
-                                <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety Data' >
+                                <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety' >
                                     <POSComponent componentName="Tabs.TabPanel">
                                         <ASF data={airlineSafetyData} />
                                     </POSComponent>
@@ -415,10 +488,16 @@ class Covid extends React.Component {
                                                 </POSComponent>
                                             ))}
 
-                                            <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety Data' >
+                                            <POSComponent componentName="Tabs.Tab" id='asa' label='Airline Safety' >
                                                 <POSComponent componentName="Tabs.TabPanel">
                                                     <ASF data={airlineSafetyData} />
+
                                                 </POSComponent>
+                                                <div style={{ float: 'right', marginTop: '3px', marginLeft: '8px' }}>
+                                                    <input type='image' width='36px' height='36px' onClick={this.onAddRemarks} src='https://support.travelport.com/webhelp/Smartpoint1G1V/Content/Resources/Images/C19/AddRemarksIcon.png' />
+
+                                                </div>
+
                                             </POSComponent>
                                         </POSComponent>
 
