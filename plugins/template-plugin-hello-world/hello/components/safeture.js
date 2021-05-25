@@ -351,14 +351,14 @@ class Covid extends React.Component {
         const { POSComponent } = this._uiHelper;
         const { windowOpened, pnrLoaded, hasPnr, firstLoad, showLoading, error, isLoaded, isLoadedDetails, details, regions, regionId, hasData, data, airlineSafetyData } = this.state;
 
-        const test = this._diHelper.get('PNR');
+        //const test = this._diHelper.get('PNR');
 
-        console.log("tst:" + test);
-        console.log('windowOpened:' + windowOpened)
+        //console.log("tst:" + test);
+        //console.log('windowOpened:' + windowOpened)
 
-        const s = this._storeHelper.getState();
+        //const s = this._storeHelper.getState();
 
-        const pnrState = s.plugins.pnrState || {};
+        //const pnrState = s.plugins.pnrState || {};
 
 
 
