@@ -1,6 +1,6 @@
 import React from 'react';
 import Tabs from "./Tabs";
-import ASF from "./safetyAttribute"
+import ASF from "./safetyAttribute.jsx"
 
 class Covid extends React.Component {
 
