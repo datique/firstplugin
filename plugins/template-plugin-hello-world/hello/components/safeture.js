@@ -183,7 +183,7 @@ class Covid extends React.Component {
     }
 
     onCloseWindowHandler = (event) => {
-        this.setState({ windowOpened: false });
+        this.setState({ windowOpened: false, isLoadedDetails: true });
 
     }
 
@@ -287,11 +287,12 @@ class Covid extends React.Component {
 
         const currentPnr = activePNR[hostConnectionId];
 
-        this.setState({ isLoadedDetails: false });
+        //this.setState({ isLoadedDetails: false });
 
         if (currentPnr) {
             const airSegments = currentPnr.airSegments;
 
+            this.setState({ isLoadedDetails: false });
 
             this.getSegmentData(airSegments);
             this.setState({ hasPnr: true, windowOpened: true, airSegments: airSegments });
@@ -300,6 +301,8 @@ class Covid extends React.Component {
             this.getAirlineSafetyData('');
             this.setState({ hasPnr: false, windowOpened: true });
         }
+
+
     }
 
     getSegmentData(airSegments) {
@@ -379,19 +382,12 @@ class Covid extends React.Component {
                                     <path d="M1.05257 2.46076C0.661638 2.07065 0.661309 1.43781 1.05183 1.04729V1.04729C1.44236 0.656763 2.07585 0.656433 2.46678 1.04655L10.9612 9.5233C11.3521 9.91342 11.3525 10.5463 10.962 10.9368V10.9368C10.5714 11.3273 9.93793 11.3276 9.547 10.9375L1.05257 2.46076Z">
                                     </path>
                                 </svg>
-                                {/*<input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} /> */}
                             </div>
                         }
                     </div>
 
 
-                    {/*
-                        windowOpened &&
-                        <div>
-                            <input type='button' value='Close' onClick={this.onCloseWindowHandler} style={{ float: 'right' }} />
-                        </div>
-                        */
-                    }
+
                     {
                         windowOpened && !hasPnr &&
                         <div>
