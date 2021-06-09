@@ -281,6 +281,8 @@ function GetRegions() {
         var regions = data.data.map((data) => ({ 'regionid': data.iso3166_1, 'region': data.regionid }));
 
 
+        regions = sort(regions, 'region');
+
         var json = JSON.stringify(regions);
 
         return json.toString('utf8');
@@ -424,3 +426,10 @@ Array.prototype.myFind = function (obj) {
         return true;
     });
 };
+
+function sort(array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
